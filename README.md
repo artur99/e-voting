@@ -1,5 +1,6 @@
 ﻿# e-Voting
 Descriere:
+
 Mi-am propus prin acest site, să creez o platformă online pentru a ușura și a revoluționa votul.Principalul motiv a fost diminuarea fraudei și mărirea numărului de persoane care votează.
 
 Sistemul funcționează astfel:
@@ -22,6 +23,7 @@ Proiectul constă în 5 secțiuni:
 
 ****************************************************
 Tehnologii:
+
 Limbaje de programare:
  - HTML5
  - CSS3 (+Bootstrap; FontAwesome)
@@ -30,4 +32,5 @@ Limbaje de programare:
  - .htaccess (url rewrite)
 
 *Design Responsive
+
 *Protejat împotriva SQLinjection, XSS, CSRF, NullByte, md5 buffer overflow
