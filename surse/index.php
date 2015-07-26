@@ -1,19 +1,12 @@
 <?php
 //Afisare erori - Debugging mode
-error_reporting(0);
+error_reporting(E_ALL);
 
 //Definire locatie
 define('__SITE_PATH', realpath(dirname(__FILE__)));
 
-//Includere configurari
-require __SITE_PATH . '/app/config.php';
+//Cronometrare timp generare pagina
+$qstmr = microtime(true);
 
-//Setare timezone
-date_default_timezone_set($timezone);
-
-//Definire locatie pentru <base>
-define('__URL', 'http://' . $_SERVER['SERVER_NAME'] . $path);
-
-//Initiere
-require __SITE_PATH . '/app/controller.php';
-?>
+//Initializare
+require __SITE_PATH . '/app/init.php';

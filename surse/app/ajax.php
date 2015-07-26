@@ -1,5 +1,5 @@
 <?php
-
+$res='';
 //Daca exista un string dupa /ajax/
 if (isset($pagarr[1])) {
     //Scriptul pentru logarea utilizatorilor
@@ -9,16 +9,16 @@ if (isset($pagarr[1])) {
         $email = $_POST['email'];
         $parola = $_POST['parola'];
         //Adaugam in log, daca cumva stringul contine caractere rau-intentionate
-        secure($cnp . " " . $email . " " . $parola);
+        $fct->secure($cnp . " " . $email . " " . $parola);
         if (!preg_match("/^(\\d{13})$/", $cnp)) {
             //Verificam daca CNP-ul e compus din 13 cifre
-            echo 'CNP-ul introdus este incorect!';
+            $res.='CNP-ul introdus este incorect!';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             //Verificam daca adresa de email este valida
-            echo 'Adresa de email introdusă este incorectă!';
+            $res.='Adresa de email introdusă este incorectă!';
         } elseif (strlen($parola) < 4) {
             //Veridicam daca lungimea parolei e mai mica de 4 caractere
-            echo 'Parola introdusă este prea scurtă!';
+            $res.='Parola introdusă este prea scurtă!';
         } else {
             //Verificam daca CNP-ul din baza de date are alocată o adresă de email
             $email = $db->real_escape_string($email);
@@ -27,20 +27,20 @@ if (isset($pagarr[1])) {
             $num = $db->query("SELECT 1 FROM persoane WHERE cnp='$cnp' AND email='$email'")->num_rows;
             if (!$num00) {
                 //CNP-ul nu are o adresa de email alocata
-                echo 'CNP-ul introdus nu se află în baza noastră de date!';
+                $res.='CNP-ul introdus nu se află în baza noastră de date!';
             } elseif ($num0) {
                 //CNP-ul nu are o adresa de email alocata
-                echo 'Vă rugăm să vă înregistrați adresa de email la primăria locală! CNP-ul introdus nu are nici o adresă de email alocată!';
+                $res.='Vă rugăm să vă înregistrați adresa de email la primăria locală! CNP-ul introdus nu are nici o adresă de email alocată!';
             } elseif (!$num) {
                 //Adresa de email pt acest CNP este incorecta
-                echo 'Adresa de email introdusă nu corespunde cu cea declarată!';
+                $res.='Adresa de email introdusă nu corespunde cu cea declarată!';
             } else {
-                $parola = advencryptor($parola);
+                $parola = $fct->advencryptor($parola);
                 //Encodam parola, si verificam daca parola, emailul si cnp-ul este corect
                 $num2 = $db->query("SELECT * FROM persoane WHERE cnp='$cnp' AND email='$email' AND parola='$parola'");
                 if (!$num2->num_rows) {
                     //Parola este gresita
-                    echo 'Parola introdusă este incorectă!';
+                    $res.='Parola introdusă este incorectă!';
                 } else {
                     $userdata = $num2->fetch_array();
                     //Calculam varsta persoanei
@@ -52,7 +52,7 @@ if (isset($pagarr[1])) {
                     $difer = $tmpdate->diff(new DateTime(date("Y-m-d H:i", time())));
                     if ($difer->y<18) {
                         //Persoana nu a implinit 18 ani
-                        echo 'Nu aveți încă vârsta minimă obligatorie de 18 ani pentru a vota!';
+                        $res.='Nu aveți încă vârsta minimă obligatorie de 18 ani pentru a vota!';
                     }else{
                         //UTILIZATORUL ESTE LOGAT IN SISTEM----
                         $_SESSION = array();
@@ -62,7 +62,7 @@ if (isset($pagarr[1])) {
                         $_SESSION['nume'] = $userdata['nume'];
                         $_SESSION['prenume'] = $userdata['prenume'];
                         $_SESSION['nastere'] = $userdata['nastere'];
-                        echo '1';
+                        $res='1';
                         //UTILIZATORUL ESTE LOGAT IN SISTEM----
                     }
                 }
@@ -70,122 +70,122 @@ if (isset($pagarr[1])) {
         }
     }
     //Scriptul pentru editarea sesiunilor de vot
-    elseif ($pagarr[1] == "editare-ses" && admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['titlu']) && isset($_POST['descr']) && isset($_POST['idata']) && isset($_POST['iora']) && isset($_POST['fdata']) && isset($_POST['fora'])) {
+    elseif ($pagarr[1] == "editare-ses" && $fct->admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['titlu']) && isset($_POST['descr']) && isset($_POST['idata']) && isset($_POST['iora']) && isset($_POST['fdata']) && isset($_POST['fora'])) {
         $id = intval($_POST['id']);
         $titlu = $db->real_escape_string(htmlentities($_POST['titlu']));
         $descr = $db->real_escape_string($_POST['descr']);
         $itime = strtotime($_POST['idata'] . " " . $_POST['iora']);
         $ftime = strtotime($_POST['fdata'] . " " . $_POST['fora']);
         //Aici data/ora este stocata in UNIX
-        if (!sescheck($id)) {
-            echo 'Această sesiune nu există!';
+        if (!$fct->sescheck($id)) {
+            $res.='Această sesiune nu există!';
         } elseif (!$itime) {
-            echo 'Data sau ora începerii votului nu sunt corecte!';
+            $res.='Data sau ora începerii votului nu sunt corecte!';
         } elseif (!$ftime) {
-            echo 'Data sau ora încheierii votului nu sunt corecte!';
+            $res.='Data sau ora încheierii votului nu sunt corecte!';
         } elseif ($itime > $ftime) {
-            echo 'Data/ora încheierii trebuie să fie după data/ora începerii votului!';
+            $res.='Data/ora încheierii trebuie să fie după data/ora începerii votului!';
         } else {
-            $res = $db->query("UPDATE sesiuni_vot SET titlu='$titlu', inceput=$itime, incheiere=$ftime, detalii='$descr' WHERE id=$id");
-            if ($res) {
-                echo '1';
+            $resq = $db->query("UPDATE sesiuni_vot SET titlu='$titlu', inceput=$itime, incheiere=$ftime, detalii='$descr' WHERE id=$id");
+            if ($resq) {
+                $res='1';
             } else {
-                echo $db->error;
+                $res.=$db->error;
             }
         }
     }
 
     //Scriptul pentru adaugarea sesiunilor de vot
-    elseif ($pagarr[1] == "adaugare-ses" && admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['titlu']) && isset($_POST['descr']) && isset($_POST['idata']) && isset($_POST['iora']) && isset($_POST['fdata']) && isset($_POST['fora'])) {
+    elseif ($pagarr[1] == "adaugare-ses" && $fct->admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['titlu']) && isset($_POST['descr']) && isset($_POST['idata']) && isset($_POST['iora']) && isset($_POST['fdata']) && isset($_POST['fora'])) {
         $titlu = $db->real_escape_string(htmlentities($_POST['titlu']));
         $descr = $db->real_escape_string($_POST['descr']);
         $itime = strtotime($_POST['idata'] . " " . $_POST['iora']);
         $ftime = strtotime($_POST['fdata'] . " " . $_POST['fora']);
         //Aici data/ora este stocata in UNIX
         if (!$itime) {
-            echo 'Data sau ora începerii votului nu sunt corecte!';
+            $res.='Data sau ora începerii votului nu sunt corecte!';
         } elseif (!$ftime) {
-            echo 'Data sau ora încheierii votului nu sunt corecte!';
+            $res.='Data sau ora încheierii votului nu sunt corecte!';
         } elseif ($itime > $ftime) {
-            echo 'Data/ora încheierii trebuie să fie după data/ora începerii votului!';
+            $res.='Data/ora încheierii trebuie să fie după data/ora începerii votului!';
         } else {
-            $res = $db->query("INSERT INTO sesiuni_vot VALUES(NULL,'$titlu','$descr',$itime,$ftime)");
-            if ($res) {
-                echo '1';
+            $query = $db->query("INSERT INTO sesiuni_vot VALUES(NULL,'$titlu','$descr',$itime,$ftime)");
+            if ($query) {
+                $res='1';
             } else {
-                echo $db->error;
+                $res.=$db->error;
             }
         }
     }
 
     //Scriptul pentru stergerea unei sesiuni de vot
-    elseif ($pagarr[1] == "del-ses" && admin_bec_check() == "1" && isset($_POST['id'])) {
+    elseif ($pagarr[1] == "del-ses" && $fct->admin_bec_check() == "1" && isset($_POST['id'])) {
         $id = intval($_POST['id']);
-        $res = $db->query("DELETE FROM sesiuni_vot WHERE id=$id LIMIT 1");
-        if ($res) {
-            echo '1';
+        $resq = $db->query("DELETE FROM sesiuni_vot WHERE id=$id LIMIT 1");
+        if ($resq) {
+            $res='1';
         } else {
-            echo $db->error;
+            $res.=$db->error;
         }
     }
 
     //Scriptul pentru editarea candidatilor
-    elseif ($pagarr[1] == "editare-cand" && admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['nume']) && isset($_POST['descr'])) {
+    elseif ($pagarr[1] == "editare-cand" && $fct->admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['nume']) && isset($_POST['descr'])) {
         $id = intval($_POST['id']);
         $nume = $db->real_escape_string(htmlentities($_POST['nume']));
         $descr = $db->real_escape_string($_POST['descr']);
-        if (!candcheck($id)) {
-            echo 'Aceast candidat nu există!';
+        if (!$fct->candcheck($id)) {
+            $res.='Aceast candidat nu există!';
         } else {
-            $res = $db->query("UPDATE candidati_vot SET nume='$nume', detalii='$descr' WHERE id=$id");
-            if ($res) {
-                echo '1';
+            $resq = $db->query("UPDATE candidati_vot SET nume='$nume', detalii='$descr' WHERE id=$id");
+            if ($resq) {
+                $res='1';
             } else {
-                echo $db->error;
+                $res.=$db->error;
             }
         }
     }
 
     //Scriptul pentru adaugarea candidatilor
-    elseif ($pagarr[1] == "adaugare-cand" && admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['nume']) && isset($_POST['descr'])) {
+    elseif ($pagarr[1] == "adaugare-cand" && $fct->admin_bec_check() == "1" && isset($_POST['id']) && isset($_POST['nume']) && isset($_POST['descr'])) {
         $id = intval($_POST['id']);
         $nume = $db->real_escape_string(htmlentities($_POST['nume']));
         $descr = $db->real_escape_string($_POST['descr']);
-        if (!candcheck($id)) {
-            echo 'Aceast candidat nu există!';
+        if (!$fct->candcheck($id)) {
+            $res.='Aceast candidat nu există!';
         } else {
-            $res = $db->query("INSERT INTO candidati_vot VALUES(NULL, $id, '$nume','$descr',0)");
-            if ($res) {
-                echo '1';
+            $resq = $db->query("INSERT INTO candidati_vot VALUES(NULL, $id, '$nume','$descr',0)");
+            if ($resq) {
+                $res='1';
             } else {
-                echo $db->error;
+                $res.=$db->error;
             }
         }
     }
 
     //Scriptul pentru stergerea unui candidat
-    elseif ($pagarr[1] == "del-cand" && admin_bec_check() == "1" && isset($_POST['id'])) {
+    elseif ($pagarr[1] == "del-cand" && $fct->admin_bec_check() == "1" && isset($_POST['id'])) {
         $id = intval($_POST['id']);
-        $res = $db->query("DELETE FROM candidati_vot WHERE id=$id LIMIT 1");
-        if ($res) {
-            unlink(__SITE_PATH . '/app/data/uploads/' . $id . '.png');
-            echo '1';
+        $resq = $db->query("DELETE FROM candidati_vot WHERE id=$id LIMIT 1");
+        if ($resq) {
+            unlink(__SITE_PATH . '/files/img/uploads/' . $id . '.png');
+            $res='1';
         } else {
-            echo $db->error;
+            $res.=$db->error;
         }
     }
     //Scriptul pentru adaugare imagine candidat
-    if ($pagarr[1] == "img-cand" && admin_bec_check() && isset($pagarr[2]) && candcheck($pagarr[2])) {
+    if ($pagarr[1] == "img-cand" && $fct->admin_bec_check() && isset($pagarr[2]) && $fct->candcheck($pagarr[2])) {
         //Variabile pentru a schimba dimensiunile imaginilor(px)
         $dimimg = 210;
         $id = $pagarr[2];
         $info = @getimagesize($_FILES['file']['tmp_name']);
         if (!isset($_FILES['file']['error']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
             //Daca apare o eroare la uploadare
-            echo "Eroare la uploadare!";
+            $res.="Eroare la uploadare!";
         } elseif ($info === FALSE || ($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
             //Daca fisierul nu e o imagine
-            echo "Fișierul nu este o imagine!";
+            $res.="Fișierul nu este o imagine!";
         } else {
             //Localizam imaginea temporara
             $sursa = $_FILES['file']['tmp_name'];
@@ -222,17 +222,17 @@ if (isset($pagarr[1])) {
             //Calculam coordonatele pentru a copia din imaginea temporara in imaginea finala
             $final_img = imagecreatetruecolor($dimimg, $dimimg);
             imagecopy($final_img, $temp_gdim, 0, 0, $x0, $y0, $dimimg, $dimimg);
-            imagepng($final_img, __SITE_PATH . '/app/data/uploads/' . $id . '.png');
+            imagepng($final_img, __SITE_PATH . '/files/img/uploads/' . $id . '.png');
             imagedestroy($final_img);
             imagedestroy($sursa_img);
-            echo '1';
+            $res='1';
         }
     }
     //Scriptul pentru inscirerea persoanelor pentru votul online
-    elseif(($pagarr[1] == "adaugare-pers" || $pagarr[1] == "resetare-pers") && admin_prim_check() != "1"){
-        echo 'Vă rugăm să vă relogați în acest panou de administrare!';
+    elseif(($pagarr[1] == "adaugare-pers" || $pagarr[1] == "resetare-pers") && $fct->admin_prim_check() != "1"){
+        $res.='Vă rugăm să vă relogați în acest panou de administrare!';
     }
-    elseif ($pagarr[1] == "adaugare-pers" && admin_prim_check() == "1" && isset($_POST['cnp']) && isset($_POST['nume']) && isset($_POST['nastere']) && isset($_POST['email'])) {
+    elseif ($pagarr[1] == "adaugare-pers" && $fct->admin_prim_check() == "1" && isset($_POST['cnp']) && isset($_POST['nume']) && isset($_POST['nastere']) && isset($_POST['email'])) {
         $cnp = preg_replace("/[^0-9,.]/", "", $_POST['cnp']);
         $nume = $db->real_escape_string(htmlentities($_POST['nume']));
         $nsarray = explode("-", $_POST['nastere']);
@@ -245,16 +245,16 @@ if (isset($pagarr[1])) {
         $email = $db->real_escape_string(htmlentities($_POST['email']));
         if (strlen($cnp)!=13) {
             //Verificam daca CNP-ul e compus din 13 cifre
-            echo 'CNP-ul introdus este incorect!';
+            $res.='CNP-ul introdus este incorect!';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             //Verificam daca adresa de email este valida
-            echo 'Adresa de email introdusă este incorectă!';
+            $res.='Adresa de email introdusă este incorectă!';
         } elseif($nastere === false){
             //Verificam daca data nasterii in unix a fost introdusa corect
-            echo 'Data nașterii introdusă nu este corectă!';
+            $res.='Data nașterii introdusă nu este corectă!';
         } else {
-            $res = $db->query("SELECT * FROM persoane WHERE cnp=$cnp LIMIT 1");
-            $rdata = $res->fetch_array();
+            $resq = $db->query("SELECT * FROM persoane WHERE cnp=$cnp LIMIT 1");
+            $rdata = $resq->fetch_array();
             $nastdb = (string)$rdata['nastere'];
             $nastedb = $nastdb[6].$nastdb[7]."-".$nastdb[4].$nastdb[5]."-".$nastdb[0].$nastdb[1].$nastdb[2].$nastdb[3];
             //In format aaaallzz transformat in zz-ll-aaaa
@@ -262,113 +262,113 @@ if (isset($pagarr[1])) {
             $tmpdate = new DateTime($nastedb);
             $difer = $tmpdate->diff(new DateTime($nastere));
 
-            if($res->num_rows==0){
+            if($resq->num_rows==0){
                 //Verificam daca CNP-ul exista in baza de date
-                echo 'Acest CNP nu există în baza de date! Dacă credeți că aceasta este o eroare, vă rugăm să sesizați autorităților!';
+                $res.='Acest CNP nu există în baza de date! Dacă credeți că aceasta este o eroare, vă rugăm să sesizați autorităților!';
             }elseif(strpos($rdata['email'],'@') !== false){
                 //Verificam daca persoana nu a mai declarat odata o adresa de email
-                echo 'Această persoană a mai declarat odată adresa de email! Vă rugăm să utilizați formularul de resetare parolă!';
+                $res.='Această persoană a mai declarat odată adresa de email! Vă rugăm să utilizați formularul de resetare parolă!';
             }elseif(!($difer->y==0&&$difer->m==0&&$difer->d==0&&$difer->h<15)){
                 //Verificam daca data nasterii din baza de date corespunde cu cea declarata
-                echo 'Data de naștere introdusă nu corespunde cu cea din baza de date!';
+                $res.='Data de naștere introdusă nu corespunde cu cea din baza de date!';
             }elseif(strtolower(preg_replace('/[[:^print:]]/', '', $rdata['nume']))!=strtolower(preg_replace('/[[:^print:]]/', '', $_POST['nume']))){
                 //Verificam daca numele din baza de date corespunde cu cel declarat
-                echo 'Numele introdus nu corespunde cu cel din baza de date!';
+                $res.='Numele introdus nu corespunde cu cel din baza de date!';
             }else{
                 //Generam o parola
                 $pass = array_merge(range('a', 'z'), range(0,9));shuffle($pass);
                 $passf =  substr(implode("", $pass), -8);
-                $passenc = advencryptor($passf);
+                $passenc = $fct->advencryptor($passf);
                 //Facem update la email si parola in baza de date
                 $ins = $db->query("UPDATE persoane SET email='$email', parola='$passenc' WHERE cnp=$cnp LIMIT 1");
                 if ($ins) {
-                    sendmail("adaugare-pers", $email, $passf);
-                    echo '1';
+                    $fct->sendmail("adaugare-pers", $email, $passf);
+                    $res='1';
                 } else {
-                    echo $db->error;
+                    $res.=$db->error;
                 }
             }
         }
     }
     //Scriptul pentru resetarea parolei pentru persoanele care voteaza online
-    elseif ($pagarr[1] == "resetare-pers" && admin_prim_check() == "1" && isset($_POST['cnp']) && isset($_POST['email'])) {
+    elseif ($pagarr[1] == "resetare-pers" && $fct->admin_prim_check() == "1" && isset($_POST['cnp']) && isset($_POST['email'])) {
         $cnp = preg_replace("/[^0-9,.]/", "", $_POST['cnp']);
         $email = $db->real_escape_string(htmlentities($_POST['email']));
         if (strlen($cnp)!=13) {
             //Verificam daca CNP-ul e compus din 13 cifre
-            echo 'CNP-ul introdus este incorect!';
+            $res.='CNP-ul introdus este incorect!';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             //Verificam daca adresa de email este valida
-            echo 'Adresa de email introdusă este incorectă!';
+            $res.='Adresa de email introdusă este incorectă!';
         } else {
-            $res = $db->query("SELECT * FROM persoane WHERE cnp=$cnp LIMIT 1");
+            $resq = $db->query("SELECT * FROM persoane WHERE cnp=$cnp LIMIT 1");
             $res2 = $db->query("SELECT * FROM persoane WHERE cnp=$cnp AND email='$email' LIMIT 1");
-            $rdata = $res->fetch_array();
-            if($res->num_rows==0){
+            $rdata = $resq->fetch_array();
+            if($resq->num_rows==0){
                 //Verificam daca CNP-ul exista in baza de date
-                echo 'Acest CNP nu există în baza de date! Dacă credeți că aceasta este o eroare, vă rugăm să sesizați autorităților!';
+                $res.='Acest CNP nu există în baza de date! Dacă credeți că aceasta este o eroare, vă rugăm să sesizați autorităților!';
             }elseif($res2->num_rows==0){
-                echo 'Adresa de email introdusă nu corespunde cu cea declarată anterior!';
+                $res.='Adresa de email introdusă nu corespunde cu cea declarată anterior!';
             }else{
                 //Generam o parola
                 $pass = array_merge(range('a', 'z'), range(0,9));shuffle($pass);
                 $passf =  substr(implode("", $pass), -8);
-                $passenc = advencryptor($passf);
+                $passenc = $fct->advencryptor($passf);
                 //Facem update la email si parola in baza de date
                 $ins = $db->query("UPDATE persoane SET email='$email', parola='$passenc' WHERE cnp=$cnp LIMIT 1");
                 if ($ins) {
-                    sendmail("resetare-pers", $email, $passf);
-                    echo '1';
+                    $fct->sendmail("resetare-pers", $email, $passf);
+                    $res='1';
                 } else {
-                    echo $db->error;
+                    $res.=$db->error;
                 }
             }
         }
     }
     //Scriptul pentru verificarea persoanelor
-    elseif($pagarr[1] == "urna-pers" && admin_urna_check() == "1" && isset($_POST['sid']) && isset($_POST['cnp'])){
+    elseif($pagarr[1] == "urna-pers" && $fct->admin_urna_check() == "1" && isset($_POST['sid']) && isset($_POST['cnp'])){
         $sid = intval($_POST['sid']);
         $cnp = preg_replace("/[^0-9,.]/", "", $_POST['cnp']);
         //Primul caracter din rezultat reprezinta tipul mesajului 1-succes, 0-eroare
-        if (!sescheck($sid)) {
-            echo '0Această sesiune nu există!';
+        if (!$fct->sescheck($sid)) {
+            $res.='0Această sesiune nu există!';
         }else{
             $tm = time();
             $chk = $db->query("SELECT 1 FROM sesiuni_vot WHERE id=$sid AND inceput<$tm AND incheiere>$tm LIMIT 1");
             if($chk->num_rows==0){
-                echo '0Nu aveți acces în această sesiune!';
+                $res.='0Nu aveți acces în această sesiune!';
             }else{
                 $chk2 = $db->query("SELECT * FROM persoane WHERE cnp=$cnp");
                 if($chk2->num_rows==0){
-                    echo '0Acest CNP nu există în baza de date!';
+                    $res.='0Acest CNP nu există în baza de date!';
                 }else{
                     $chk3 = $db->query("SELECT ip, timp FROM voturi WHERE cnp=$cnp AND sesiune_vot=$sid");
                     if($chk3->num_rows==1){
                         $chk3d = $chk3->fetch_array();
-                        echo '0Această persoană a mai votat odată pe '.date("d.m.Y", $chk3d['timp']).' la ora '.date("H:i", $chk3d['timp']).' de ';
+                        $res.='0Această persoană a mai votat odată la această sesiune de vot pe '.date("d.m.Y", $chk3d['timp']).' la ora '.date("H:i", $chk3d['timp']).' de ';
                         if(strpos($chk3d['ip'],'urna') !== false){
-                            echo ' la '.$chk3d['ip'];
+                            $res.=' la '.$chk3d['ip'];
                         }else{
-                            echo ' pe platforma online';
+                            $res.=' pe platforma online';
                         }
-                        echo ', și nu poate vota încă odată!';
+                        $res.=', și nu poate vota încă odată!';
                     }else{
                         $chk2d = $chk2->fetch_array();
-                        echo '1';
-                        echo '<em class="pull-right">Această persoană nu a votat încă...</em>';
-                        echo '<table class="pull-left">';
-                        echo '<tr><td><strong>CNP:</strong></td><td>'.$chk2d['cnp'].'</td></tr>';
-                        echo '<tr><td><strong>Nume:</strong></td><td>'.$chk2d['nume'].' '.$chk2d['prenume'].'</td></tr>';
-                        echo '<tr><td><strong>Anul nașterii: </strong></td><td>'.substr($chk2d['nastere'], 0, 4).'</td></tr>';
-                        echo '</table>';
-                        echo '<button class="btn btn-1 pull-right" onclick="urna_adaug(event, \''.$chk2d['cnp'].'\')">Marchează faptul că a votat la urnă</button>';
+                        $res='1';
+                        $res.='<em class="pull-right">Această persoană nu a votat încă...</em>';
+                        $res.='<table class="pull-left">';
+                        $res.='<tr><td><strong>CNP:</strong></td><td>'.$chk2d['cnp'].'</td></tr>';
+                        $res.='<tr><td><strong>Nume:</strong></td><td>'.$chk2d['nume'].' '.$chk2d['prenume'].'</td></tr>';
+                        $res.='<tr><td><strong>Anul nașterii: </strong></td><td>'.substr($chk2d['nastere'], 0, 4).'</td></tr>';
+                        $res.='</table>';
+                        $res.='<button class="btn btn-1 pull-right" onclick="urna_adaug(event, \''.$chk2d['cnp'].'\')">Marchează faptul că a votat la urnă</button>';
                     }
                 }
             }
         }
     }
     //Scriptul pentru marcarea faptului ca o persoana a votat la urna
-    elseif($pagarr[1] == "urna-adaug" && admin_urna_check() == "1" && isset($_POST['sid']) && isset($_POST['cnp'])){
+    elseif($pagarr[1] == "urna-adaug" && $fct->admin_urna_check() == "1" && isset($_POST['sid']) && isset($_POST['cnp'])){
         $sid = intval($_POST['sid']);
         $cnp = preg_replace("/[^0-9,.]/", "", $_POST['cnp']);
         //verificam daca sesiunea este deschisa
@@ -379,18 +379,18 @@ if (isset($pagarr[1])) {
         //Verificam daca aceasta persoana a mai votat odata
         $chk3 = $db->query("SELECT 1 FROM voturi WHERE cnp=$cnp AND sesiune_vot=$sid");
 
-        if(!sescheck($sid)){
-            echo 'Sesiunea de vot nu există!';
+        if(!$fct->sescheck($sid)){
+            $res.='Sesiunea de vot nu există!';
         }elseif($chk->num_rows==0){
-            echo 'Sesiunea de vot s-a încheiat, sau nu a început încă!';
+            $res.='Sesiunea de vot s-a încheiat, sau nu a început încă!';
         }elseif($chk2->num_rows==0){
-            echo 'CNP-ul nu există in baza de date!';
+            $res.='CNP-ul nu există in baza de date!';
         }elseif($chk3->num_rows>0){
-            echo 'Această persoană a mai votat odată!';
+            $res.='Această persoană a mai votat odată!';
         }else{
             $codpostal = intval($_SESSION['urnass1']);
             $db->query("INSERT INTO voturi VALUES(NULL, $cnp, $sid, 'urna-$codpostal', $tm)");
-            echo '1';
+            $res='1';
         }
     }
 }
