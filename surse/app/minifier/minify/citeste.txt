@@ -1,1 +1,0 @@
-Minificatoarele au fost preluate de pe github.com, iar fisierele cssmin.php si jsmin.php pastreaza licenta in interiorul fisierului

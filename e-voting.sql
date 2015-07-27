@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2015 at 02:20 AM
+-- Generation Time: Jul 27, 2015 at 04:39 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `candidati_vot` (
   `nume` text NOT NULL,
   `detalii` text NOT NULL,
   `voturi` bigint(20) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `candidati_vot`
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `error_log` (
 `id` int(11) NOT NULL,
   `eroare` text NOT NULL,
   `timp` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `error_log`
@@ -87,127 +87,7 @@ INSERT INTO `error_log` (`id`, `eroare`, `timp`) VALUES
 (22, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/votare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\functions.php on line 43', 1431259932),
 (23, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/votare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\functions.php on line 45', 1431259932),
 (24, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/sub/'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\template\\votare.php on line 44', 1431259932),
-(25, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/sub/votare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\template\\votare.php on line 44', 1431259932),
-(26, 'Trying to get property of non-object in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 5', 1431259932),
-(27, 'Undefined index: nume in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 13', 1431259932),
-(28, 'Trying to get property of non-object in D:\\Host\\E-votus\\app\\functions.php on line 135', 1431259932),
-(29, 'Trying to get property of non-object in D:\\Host\\E-votus\\app\\functions.php on line 134', 1431259932),
-(30, 'Object of class mysqli_result could not be converted to int in D:\\Host\\E-votus\\app\\functions.php on line 144', 1431259932),
-(31, 'Object of class mysqli_result could not be converted to int in D:\\Host\\E-votus\\app\\functions.php on line 144', 1431259932),
-(32, 'Object of class mysqli_result could not be converted to int in D:\\Host\\E-votus\\app\\functions.php on line 144', 1431259932),
-(33, 'Object of class mysqli_result could not be converted to int in D:\\Host\\E-votus\\app\\functions.php on line 144', 1431259932),
-(34, 'Trying to get property of non-object in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 49', 1431259932),
-(35, 'date() expects parameter 2 to be long, string given in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 54', 1431259932),
-(36, 'Undefined index: sfarsit in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 54', 1431259932),
-(37, 'Undefined index: detaliii in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 54', 1431259932),
-(38, 'Undefined variable: c2 in D:\\Host\\E-votus\\app\\functions.php on line 199', 1431259932),
-(39, 'Trying to get property of non-object in D:\\Host\\E-votus\\app\\template\\pag\\votare.php on line 16', 1431259932),
-(40, 'file_get_contents(files/main.css): failed to open stream: No such file or directory in D:\\Host\\E-votus\\app\\data\\css.php on line 17', 1431259932),
-(41, 'file_get_contents(files/main.js): failed to open stream: No such file or directory in D:\\Host\\E-votus\\app\\data\\js.php on line 12', 1431259932),
-(42, 'file_get_contents(files/main.js): failed to open stream: No such file or directory in D:\\Host\\E-votus\\app\\data\\js.php on line 12', 1431259932),
-(43, 'file_get_contents(files/main.js): failed to open stream: No such file or directory in D:\\Host\\E-votus\\app\\data\\js.php on line 12', 1431259932),
-(44, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/bec-admin.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\functions.php on line 55', 1431259932),
-(45, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/pag/admin-bec/sesiuni.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\template\\admin-bec.php on line 50', 1431259932),
-(46, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/pag/admin-bec/sesiuni.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\template\\admin-bec.php on line 50', 1431259932),
-(47, 'Undefined variable: chars in D:\\Host\\E-votus\\app\\functions.php on line 135', 1431259932),
-(48, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 56', 1431259932),
-(49, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 56', 1431259932),
-(50, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 58', 1431259932),
-(51, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 58', 1431259932),
-(52, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(53, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(54, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(55, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(56, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(57, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(58, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(59, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(60, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(61, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(62, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 59', 1431259932),
-(63, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(64, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(65, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(66, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(67, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(68, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 60', 1431259932),
-(69, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 62', 1431259932),
-(70, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(71, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(72, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(73, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(74, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(75, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(76, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(77, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(78, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\admin-bec\\editare.php on line 38', 1431259932),
-(79, 'Undefined variable: descriere in D:\\Host\\E-vote\\app\\ajax.php on line 74', 1431259932),
-(80, 'Undefined variable: desc in D:\\Host\\E-vote\\app\\ajax.php on line 74', 1431259932),
-(81, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-bec/editare_cand.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-bec.php on line 81', 1431259932),
-(82, 'getimagesize(): Filename cannot be empty in D:\\Host\\E-vote\\app\\ajax.php on line 162', 1431259932),
-(83, 'getimagesize(): Filename cannot be empty in D:\\Host\\E-vote\\app\\ajax.php on line 162', 1431259932),
-(84, 'getimagesize(): Filename cannot be empty in D:\\Host\\E-vote\\app\\ajax.php on line 162', 1431259932),
-(85, 'Undefined index: id in D:\\Host\\E-vote\\app\\ajax.php on line 196', 1431259932),
-(86, 'getimagesize(): Filename cannot be empty in D:\\Host\\E-vote\\app\\ajax.php on line 163', 1431259932),
-(87, 'getimagesize(): Filename cannot be empty in D:\\Host\\E-vote\\app\\ajax.php on line 163', 1431259932),
-(88, 'getimagesize(): Filename cannot be empty in D:\\Host\\E-vote\\app\\ajax.php on line 163', 1431259932),
-(89, 'Undefined index: id in D:\\Host\\E-vote\\app\\ajax.php on line 197', 1431259932),
-(90, 'Undefined index: descriere in D:\\Host\\E-vote\\app\\template\\pag\\votare\\votare.php on line 15', 1431259932),
-(91, 'Undefined variable: primadm in D:\\Host\\E-vote\\app\\template\\admin-prim.php on line 10', 1431259932),
-(92, 'Undefined variable: primadm in D:\\Host\\E-vote\\app\\template\\admin-prim.php on line 10', 1431259932),
-(93, 'Undefined variable: primadm in D:\\Host\\E-vote\\app\\template\\admin-prim.php on line 10', 1431259932),
-(94, 'Undefined index: postal in D:\\Host\\E-vote\\app\\functions.php on line 267', 1431259932),
-(95, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-prim/reclamatii.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-prim.php on line 57', 1431259932),
-(96, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-prim/reclamatii.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-prim.php on line 57', 1431259932),
-(97, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-prim/adaugare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-prim.php on line 57', 1431259932),
-(98, 'ob_clean(): failed to delete buffer. No buffer to delete in D:\\Host\\E-vote\\app\\controller.php on line 13', 1431259932),
-(99, 'ob_clean(): failed to delete buffer. No buffer to delete in D:\\Host\\E-vote\\app\\controller.php on line 13', 1431259932),
-(100, 'ob_start(): failed to create buffer in D:\\Host\\E-vote\\app\\controller.php on line 9', 1431259932),
-(101, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(102, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(103, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(104, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(105, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(106, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(107, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(108, 'Undefined variable: js in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 35', 1431259932),
-(109, 'preg_replace(): Unknown modifier ''g'' in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 34', 1431259932),
-(110, 'preg_replace(): Unknown modifier ''g'' in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 34', 1431259932),
-(111, 'preg_replace(): Unknown modifier ''g'' in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 34', 1431259932),
-(112, 'preg_replace(): Unknown modifier ''g'' in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 34', 1431259932),
-(113, 'preg_replace(): Unknown modifier ''g'' in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 34', 1431259932),
-(114, 'preg_replace(): Unknown modifier ''g'' in D:\\Host\\E-vote\\app\\phpdata\\minifier.php on line 34', 1431259932),
-(115, 'Undefined offset: 1 in D:\\Host\\E-vote\\app\\phpdata\\switcher2.php on line 21', 1431259932),
-(116, 'Undefined index: pg in D:\\Host\\E-vote\\app\\phpdata\\switcher2.php on line 19', 1431259932),
-(117, 'Undefined variable: type in D:\\Host\\E-vote\\app\\controller.php on line 9', 1431259932),
-(118, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/admin-prime.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\phpdata\\switcher.php on line 68', 1431259932),
-(119, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/admin-prime.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\phpdata\\switcher.php on line 64', 1431259932),
-(120, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/admin-prime.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\phpdata\\switcher.php on line 64', 1431259932),
-(121, 'Undefined variable: pg2 in D:\\Host\\E-vote\\app\\template\\votare.php on line 18', 1431259932),
-(122, 'Undefined variable: pg2 in D:\\Host\\E-vote\\app\\template\\votare.php on line 18', 1431259932),
-(123, 'Undefined variable: primadm in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 10', 1431259932),
-(124, 'Undefined variable: primadm in D:\\Host\\E-vote\\app\\phpdata\\switcher.php on line 95', 1431259932),
-(125, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(126, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(127, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(128, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(129, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(130, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(131, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(132, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(133, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(134, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(135, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 50', 1431259932),
-(136, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 52', 1431259932),
-(137, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 52', 1431259932),
-(138, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 52', 1431259932),
-(139, 'include(): Failed opening ''D:\\Host\\E-vote/app/template/pag/admin-urna/index.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 52', 1431259932),
-(140, 'Undefined variable: p in D:\\Host\\E-vote\\app\\template\\admin-urna.php on line 48', 1431259932),
-(141, 'Object of class mysqli_result could not be converted to int in D:\\Host\\E-vote\\app\\ajax.php on line 342', 1431259932),
-(142, 'Undefined index: token in D:\\Host\\E-vote\\app\\phpdata\\switcher.php on line 45', 1431259932),
-(143, 'Undefined index: data in D:\\Host\\E-vote\\app\\template\\pag\\admin-urna\\sesiune.php on line 11', 1431259932),
-(144, 'A non well formed numeric value encountered in D:\\Host\\E-vote\\app\\template\\pag\\admin-dev\\hack.php on line 8', 1431259932),
-(145, 'A non well formed numeric value encountered in D:\\Host\\E-vote\\app\\template\\pag\\admin-dev\\hack.php on line 8', 1431259932);
+(25, 'include(): Failed opening ''D:\\Host\\E-votus/app/template/sub/votare.php'' for inclusion (include_path=''.;C:\\Programs\\xampp\\php\\PEAR'') in D:\\Host\\E-votus\\app\\template\\votare.php on line 44', 1431259932);
 
 -- --------------------------------------------------------
 
@@ -262,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `persoane` (
 
 INSERT INTO `persoane` (`cnp`, `nume`, `prenume`, `nastere`, `email`, `parola`) VALUES
 (1200904256099, 'Albu\r\n', 'Ștefan', 19200904, 'example@domain.com', 'efad826f94ec5d1856e0f07c3d03b7efd05fc923'),
-(1234567890123, 'Vultur', 'David', 19890718, 'david1989mail@yahoo.com', 'efad826f94ec5d1856e0f07c3d03b7efd05fc923'),
+(1234567890123, 'Vultur', 'David', 19990718, 'david1989mail@yahoo.com', 'efad826f94ec5d1856e0f07c3d03b7efd05fc923'),
 (1281212237740, 'Popescu\r\n', 'Maria\r\n', 19281212, NULL, NULL),
 (1321205243185, 'Marin\r\n', 'Andrei\r\n', 19321205, NULL, NULL),
 (1381116228546, 'Tudor\r\n', 'Alexandra\r\n', 19381116, NULL, NULL),
@@ -360,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `sesiuni_vot` (
 --
 
 INSERT INTO `sesiuni_vot` (`id`, `titlu`, `detalii`, `inceput`, `incheiere`) VALUES
-(1, 'Votează Președintele Rom&acirc;niei 2014', 'Votează președintele României pentru anii 2014-2018 in sesiunea din 2014. Președintele României deține puterea executivă', 1437930000, 1437943200);
+(1, 'Votează Președintele Rom&acirc;niei 2014', 'Votează președintele României pentru anii 2014-2018 in sesiunea din 2014. Președintele României deține puterea executivă', 1437411600, 1438375200);
 
 -- --------------------------------------------------------
 
@@ -395,14 +275,7 @@ CREATE TABLE IF NOT EXISTS `voturi` (
   `sesiune_vot` int(11) NOT NULL,
   `ip` text NOT NULL,
   `timp` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `voturi`
---
-
-INSERT INTO `voturi` (`id`, `cnp`, `sesiune_vot`, `ip`, `timp`) VALUES
-(2, 1281212237740, 1, 'urna-123456', 1432324604);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -470,12 +343,12 @@ ALTER TABLE `voturi`
 -- AUTO_INCREMENT for table `candidati_vot`
 --
 ALTER TABLE `candidati_vot`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `error_log`
 --
 ALTER TABLE `error_log`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=146;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `hack_log`
 --
@@ -500,7 +373,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `voturi`
 --
 ALTER TABLE `voturi`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

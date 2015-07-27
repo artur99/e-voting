@@ -15,6 +15,9 @@ class view{
     }
     public function show(){
         $output = $this->content;
+        if($this->minify=="html"){
+            $output = minifyhtml($output);
+        }
         echo $output;
     }
 }

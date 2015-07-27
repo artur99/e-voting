@@ -20,7 +20,7 @@ class model{
     public function footer(){
         $res = '';
         $res .='<div class="footer"><div class="line"></div>';
-        $res .='<b><em>Guvernul României</em></b> - Cap. III, Art. 325: Fapta de a introduce, modifica sau şterge, fără drept, date informatice ori de a restricţiona, fără drept, accesul la aceste date, rezultând date necorespunzătoare adevărului, în scopul de a fi utilizate în vederea producerii unei consecinţe juridice, constituie infracţiune şi se pedepseşte cu închisoare de la 2 la 7 ani.<br>Acest sistem NU este oficial și nu are nici o legătură cu Guvernul României! Acest sistem este doar o prezentare!';
+        $res .='<b><em>Guvernul României*</em></b> - Cap. III, Art. 325: Fapta de a introduce, modifica sau şterge, fără drept, date informatice ori de a restricţiona, fără drept, accesul la aceste date, rezultând date necorespunzătoare adevărului, în scopul de a fi utilizate în vederea producerii unei consecinţe juridice, constituie infracţiune şi se pedepseşte cu închisoare de la 2 la 7 ani.<br>*Acest sistem NU este oficial și nu are nici o legătură cu Guvernul României! Acest sistem este doar o prezentare!';
         $res .='</div>';
         return $res;
     }

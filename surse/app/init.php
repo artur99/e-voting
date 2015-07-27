@@ -9,6 +9,8 @@ require __SITE_PATH . '/app/controller.php';
 require __SITE_PATH . '/app/model.php';
 require __SITE_PATH . '/app/view.php';
 
+@include __SITE_PATH . '/app/minifier/minifier.php';
+
 date_default_timezone_set($conf['sys_timezone']);
 define('__URL', 'http://'.$_SERVER['SERVER_NAME'].$conf['sys_path']);
 $pagURL = explode("/", isset($_GET['pg'])?$_GET['pg']:'');

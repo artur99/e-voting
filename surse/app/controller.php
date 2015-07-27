@@ -107,6 +107,8 @@ class controller{
             }
             foreach($repl as $nm => $val){$page = str_ireplace('{ '.$nm.' }', $val, $page);}
             $output = preg_replace('/\\{\\ [a-zA-Z_-]+\\ \\}/i', '', $page);
+            //Activam minificarea
+            $view->setminify("html");
         }
         //Stergem orice "{ }" ramase
         $view->add($output);
