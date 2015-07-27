@@ -1,7 +1,7 @@
 <?php
 
 //Configurare path   -  "/" daca siteul este in root
-$conf['sys_path'] = '/e-voting/';
+$conf['sys_path'] = '/';
 //Configurare timezone
 $conf['sys_timezone'] = "Europe/Bucharest";
 //Configurare bd
