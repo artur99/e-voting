@@ -42,3 +42,6 @@ Ce nu dețin:
  - Framework-ul Bootstrap - /files/static/js/bootstrap.min.js, /files/static/js/bootstrap.min.css, /files/static/fonts/glyphicons-halflings-regular.*
  - Sistemul de icon-uri FontAwesome: /files/static/js/font-awesome.min.css, /files/static/fonts/fontawesome*
  - Script-ul de minificare CSS Gary Jones - /app/minifier/minify/cssmin.php
+
+*****************************************************
+Licență: CC BY 3.0
