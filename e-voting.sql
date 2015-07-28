@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2015 at 04:39 PM
+-- Generation Time: Jul 28, 2015 at 01:47 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `candidati_vot` (
   `nume` text NOT NULL,
   `detalii` text NOT NULL,
   `voturi` bigint(20) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `candidati_vot`
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `persoane` (
 
 INSERT INTO `persoane` (`cnp`, `nume`, `prenume`, `nastere`, `email`, `parola`) VALUES
 (1200904256099, 'Albu\r\n', 'Ștefan', 19200904, 'example@domain.com', 'efad826f94ec5d1856e0f07c3d03b7efd05fc923'),
-(1234567890123, 'Vultur', 'David', 19990718, 'david1989mail@yahoo.com', 'efad826f94ec5d1856e0f07c3d03b7efd05fc923'),
+(1234567890123, 'Vultur', 'David', 19890718, 'david1989mail@yahoo.com', 'efad826f94ec5d1856e0f07c3d03b7efd05fc923'),
 (1281212237740, 'Popescu\r\n', 'Maria\r\n', 19281212, NULL, NULL),
 (1321205243185, 'Marin\r\n', 'Andrei\r\n', 19321205, NULL, NULL),
 (1381116228546, 'Tudor\r\n', 'Alexandra\r\n', 19381116, NULL, NULL),
@@ -343,7 +343,7 @@ ALTER TABLE `voturi`
 -- AUTO_INCREMENT for table `candidati_vot`
 --
 ALTER TABLE `candidati_vot`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `error_log`
 --
