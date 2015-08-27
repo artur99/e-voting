@@ -1,4 +1,6 @@
 ﻿# e-Voting
+License: CC0
+*****
 Descriere:
 
 Mi-am propus prin acest site, să creez o platformă online pentru a ușura și a revoluționa votul.Principalul motiv a fost diminuarea fraudei și mărirea numărului de persoane care votează.
@@ -42,6 +44,3 @@ Ce nu dețin:
  - Framework-ul Bootstrap - /files/static/js/bootstrap.min.js, /files/static/js/bootstrap.min.css, /files/static/fonts/glyphicons-halflings-regular.*
  - Sistemul de icon-uri FontAwesome: /files/static/js/font-awesome.min.css, /files/static/fonts/fontawesome*
  - Script-ul de minificare CSS Gary Jones - /app/minifier/minify/cssmin.php
-
-*****************************************************
-Licență: CC BY 3.0
