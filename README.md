@@ -44,3 +44,18 @@ Ce nu dețin:
  - Framework-ul Bootstrap - /files/static/js/bootstrap.min.js, /files/static/js/bootstrap.min.css, /files/static/fonts/glyphicons-halflings-regular.*
  - Sistemul de icon-uri FontAwesome: /files/static/js/font-awesome.min.css, /files/static/fonts/fontawesome*
  - Script-ul de minificare CSS Gary Jones - /app/minifier/minify/cssmin.php
+
+******************************************************
+Screenshot-uri:
+
+<img src="./screenshots/sc3.png" width="200"> 
+<img src="./screenshots/sc5.png" width="200"> 
+<img src="./screenshots/sc1.png" width="200"> 
+<img src="./screenshots/sc2.png" width="200"> 
+<img src="./screenshots/sc8.png" width="200"> 
+<img src="./screenshots/sc9.png" width="200"> 
+<img src="./screenshots/sc10.png" width="200"> 
+<img src="./screenshots/sc6.png" width="200"> 
+<img src="./screenshots/poster.jpg" width="300"> 
+
+[Mai multe imagini...](./screenshots/)
