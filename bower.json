@@ -1,0 +1,22 @@
+{
+  "name": "e-voting",
+  "authors": [
+    "artur99 <david1989mail@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "CC0",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "components-font-awesome": "^4.7.0",
+    "bootstrap": "^3.3.7",
+    "summernote": "^0.8.2"
+  }
+}

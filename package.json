@@ -1,0 +1,29 @@
+{
+  "name": "e-voting",
+  "version": "2.0.0",
+  "description": "Prototip de platfomă de vot electronic",
+  "main": "gruntfile.js",
+  "dependencies": {
+    "bower": "^1.8.0",
+    "grunt": "^1.0.1",
+    "grunt-bower-concat": "^1.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+    "load-grunt-tasks": "^3.4.1"
+  },
+  "devDependencies": {
+      "grunt-contrib-watch": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artur99/e-voting/"
+  },
+  "author": "artur99 (Vultur David)",
+  "license": "CC0-1.0"
+}
