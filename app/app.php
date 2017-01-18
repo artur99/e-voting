@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../_phpvendor/autoload.php';
+
 $app = new Silex\Application();
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());

@@ -6,12 +6,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
+use Symfony\Component\HttpFoundation\RequestMatcher;
+use Symfony\Component\Yaml\Yaml;
 use Stringy\Stringy as S;
 
-date_default_timezone_set("Europe/Bucharest");
-
 $app['conf.path'] = dirname(dirname($_SERVER['SCRIPT_FILENAME']));
-$app['twig.path'] = $app['conf.path'].'/templates';
+$app['twig.path'] = $app['conf.path'].'/app/Templates';
 $app['twig.assets'] = '/assets/';
 $app['conf.url'] = function($app){
     return $app['request']->getScheme() . '://' . $app['request']->getHttpHost() . $app['request']->getBasePath();
@@ -20,13 +20,14 @@ $app['conf.url_path'] = function($app){
     return $app['request']->getBasePath();
 };
 
-
-$config = (new Symfony\Component\Yaml\Parser())->parse(file_get_contents($app['conf.path']."/app/conf.yaml"));
+$config = Yaml::parse($app['conf.path']."/app/conf.yaml");
 
 foreach($config as $k=>$v){
     $app[$k]=$v;
 }
 unset($config);
+
+date_default_timezone_set($app['conf.timezone']);
 
 $app['db.options'] = array(
     'driver' => 'pdo_mysql',
@@ -65,10 +66,14 @@ function a_image($loc){
 }
 function global_patches($app){
     global $fb;
-    $fb = new Facebook\Facebook(array(
-      'app_id'  => $app['conf.facebook.app_id'],
-      'app_secret' => $app['conf.facebook.app_secret']
-    ));
+    if($app['conf.facebook.use']){
+        $fb = new Facebook\Facebook(array(
+          'app_id'  => $app['conf.facebook.app_id'],
+          'app_secret' => $app['conf.facebook.app_secret']
+        ));
+    }else{
+        $fb = null;
+    }
 }
 
 $app['csrf'] = $app->share(function () {
@@ -76,44 +81,44 @@ $app['csrf'] = $app->share(function () {
 });
 $app['twig'] = $app->share($app->extend('twig', function($twig,$app){
     $twig->addExtension(new Twig_Extensions_Extension_Text());
-    $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('asset', function ($asset)use($app){
         if(strpos($asset, '://') !== false) return $asset;
         return $app['conf.url'].$app['twig.assets'].ltrim($asset, '/');
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('user', function($what)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('user', function($what)use($app){
         return $app['user']->data($what);
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('l', function($what)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('l', function($what)use($app){
         if(strpos($what, '://') !== false) return $what;
         return $app['conf.url'].'/'.ltrim($what, '/');
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('csrftoken', function($id)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('csrftoken', function($id)use($app){
         return $app['csrf']->getToken($id)->__tostring();
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('mact', function($id)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('mact', function($id)use($app){
         $d1 = explode('/', ltrim($id, '/'));
         $d2 = explode('/', ltrim($app['request']->getPathInfo(), '/'));
         $cond = isset($d1[0], $d2[0]) && !empty($d1[0]) && $d1[0]==$d2[0];
         return $id == $app['request']->getPathInfo() || $cond ?' active':'';
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('mact2', function($id)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('mact2', function($id)use($app){
         $d1 = explode('/', ltrim($id, '/'));
         $d2 = explode('/', ltrim($app['request']->getPathInfo(), '/'));
         $cond = isset($d1[0], $d2[0]) && !empty($d1[0]) && $d1[0]==$d2[0];
         return $id == $app['request']->getPathInfo() || $cond ?'class="active"':'';
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('img', function($loc)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('img', function($loc)use($app){
         return a_image($loc);
     }));
-    $twig->addFunction(new \Twig_SimpleFunction('gen_bgcss', function($loc)use($app){
+    $twig->addFunction(new Twig_SimpleFunction('gen_bgcss', function($loc)use($app){
         $link = a_image($loc);
         return 'background-image: url(\''.$link.'\')';
     }));
-    $twig->addFilter(new \Twig_SimpleFilter('slugify', function($text){
+    $twig->addFilter(new Twig_SimpleFilter('slugify', function($text){
         $s = S::create($text);
         return $s->slugify();
     }));
-    $twig->addFilter(new \Twig_SimpleFilter('shorten', function($text){
+    $twig->addFilter(new Twig_SimpleFilter('shorten', function($text){
         return Misc\MiscClass::shorten($text);
     }));
     return $twig;
