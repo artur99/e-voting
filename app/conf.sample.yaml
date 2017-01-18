@@ -1,0 +1,11 @@
+debug: true
+
+conf.title: 'Titlu site'
+
+conf.db.host: localhost
+conf.db.user: root
+conf.db.pass: 
+conf.db.name: nume_db
+
+conf.facebook.app_id: 00
+conf.facebook.app_secret: 00
