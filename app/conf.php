@@ -20,7 +20,7 @@ $app['conf.url_path'] = function($app){
     return $app['request']->getBasePath();
 };
 
-$config = Yaml::parse($app['conf.path']."/app/conf.yaml");
+$config = Yaml::parse(file_get_contents($app['conf.path']."/app/conf.yaml"));
 
 foreach($config as $k=>$v){
     $app[$k]=$v;
@@ -76,10 +76,10 @@ function global_patches($app){
     }
 }
 
-$app['csrf'] = $app->share(function () {
+$app['csrf'] = function () {
     return new CsrfTokenManager();
-});
-$app['twig'] = $app->share($app->extend('twig', function($twig,$app){
+};
+$app['twig'] = $app->extend('twig', function($twig,$app){
     $twig->addExtension(new Twig_Extensions_Extension_Text());
     $twig->addFunction(new Twig_SimpleFunction('asset', function ($asset)use($app){
         if(strpos($asset, '://') !== false) return $asset;
@@ -122,15 +122,6 @@ $app['twig'] = $app->share($app->extend('twig', function($twig,$app){
         return Misc\MiscClass::shorten($text);
     }));
     return $twig;
-}));
-$app['user'] = $app->share(function() use ($app) {
-    return new user($app);
-});
-
-$app['executers'] = $app->share(function() use ($app) {
-    return [
-        'user' => new \DaySplit\Executers\UserExecuter($app['db']),
-    ];
 });
 
 
